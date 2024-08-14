@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/coins")
+@RequestMapping("/api/coins")
 public class CoinController
 {
     @Autowired
@@ -68,6 +68,16 @@ public class CoinController
     {
         String searchedCoins = coinService.getTradingCoins();
         JsonNode jsonNode = objectMapper.readTree(searchedCoins);
+
+        return ResponseEntity.ok(jsonNode);
+    }
+
+
+    @GetMapping("/details/{coinId}")
+    ResponseEntity<JsonNode> getCoinDetails(@PathVariable String coinId) throws Exception
+    {
+        String coin = coinService.getCoinDetails(coinId);
+        JsonNode jsonNode = objectMapper.readTree(coin);
 
         return ResponseEntity.ok(jsonNode);
     }

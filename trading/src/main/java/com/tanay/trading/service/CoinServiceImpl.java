@@ -115,6 +115,7 @@ public class CoinServiceImpl implements CoinService
             coin.setMarketCapChangePercentage24h(marketData.get("market_cap_change_percentage_24h_in_currency")
                     .get("inr").asDouble());
             coin.setTotalSupply(marketData.get("total_supply").asLong());
+            
             coinRepository.save(coin);
 
             return response.getBody();

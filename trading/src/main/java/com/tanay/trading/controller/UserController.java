@@ -41,6 +41,7 @@ public class UserController
     @GetMapping("/profile")
     public ResponseEntity<User> getUserProfile(@RequestHeader(JwtConstant.JWT_HEADER) String jwt) throws Exception
     {
+        System.out.println(jwt);
         User user = userService.findUserByJwt(jwt);
 
         return new ResponseEntity<>(user, HttpStatus.OK);

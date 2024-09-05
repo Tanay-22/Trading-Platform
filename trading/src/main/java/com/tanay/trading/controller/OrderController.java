@@ -1,7 +1,6 @@
 package com.tanay.trading.controller;
 
 import com.tanay.trading.config.JwtConstant;
-import com.tanay.trading.domain.OrderStatus;
 import com.tanay.trading.domain.OrderType;
 import com.tanay.trading.model.Coin;
 import com.tanay.trading.model.Order;
@@ -11,8 +10,7 @@ import com.tanay.trading.service.CoinService;
 import com.tanay.trading.service.OrderService;
 import com.tanay.trading.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

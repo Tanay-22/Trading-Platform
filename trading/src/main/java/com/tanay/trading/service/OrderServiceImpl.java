@@ -2,10 +2,7 @@ package com.tanay.trading.service;
 
 import com.tanay.trading.domain.OrderStatus;
 import com.tanay.trading.domain.OrderType;
-import com.tanay.trading.model.Coin;
-import com.tanay.trading.model.Order;
-import com.tanay.trading.model.OrderItem;
-import com.tanay.trading.model.User;
+import com.tanay.trading.model.*;
 import com.tanay.trading.repository.OrderItemRepository;
 import com.tanay.trading.repository.OrderRepository;
 import jakarta.transaction.Transactional;
@@ -27,6 +24,9 @@ public class OrderServiceImpl implements OrderService
 
     @Autowired
     private OrderItemRepository orderItemRepository;
+
+    @Autowired
+    private AssetService assetService;
 
     @Override
     public Order createOrder(User user, OrderItem orderItem, OrderType orderType)
@@ -85,7 +85,14 @@ public class OrderServiceImpl implements OrderService
 
         order.setStatus(OrderStatus.SUCCESS);
         order.setOrderType(OrderType.BUY);
+
         // create asset
+        Asset oldAsset = assetService.findAssetByUserIdAndCoinId(user.getId(), coin.getId());
+
+        if(oldAsset == null)
+            assetService.createAsset(user, coin, quantity);
+        else
+            assetService.updateAsset(oldAsset.getId(), quantity);
 
         return orderRepository.save(order);
     }
@@ -97,24 +104,35 @@ public class OrderServiceImpl implements OrderService
             throw new Exception("Quantity should be GREATER THAN ZERO");
 
         double sellPrice = coin.getCurrentPrice();
-        double buyPrice = assetToSell.getPrice();
+        Asset assetToSell = assetService.findAssetByUserIdAndCoinId(user.getId(), coin.getId());
 
-        OrderItem orderItem = createOrderItem(coin, quantity, 0, sellPrice);
-
-        Order order = createOrder(user, orderItem, OrderType.SELL);
-        orderItem.setOrder(order);
-
-        if(assetToSell.getQuantity() >= quantity)
+        if(assetToSell != null)
         {
-            walletService.payOrderPayment(order, user);
+            OrderItem orderItem = createOrderItem(coin, quantity, 0, sellPrice);
 
-            Asset updatedAsset = assetService.updateAsset(assetToSell.getId(), -quantity);
-            if(updatedAsset.getQuantity() * coin,getCurrentPrice() <= 1)
-                assetService.deleteAsset(updatedAsset.getId());
-            
-            return orderRepository.save(order);
+            double buyPrice = assetToSell.getBuyPrice();
+
+            Order order = createOrder(user, orderItem, OrderType.SELL);
+            orderItem.setOrder(order);
+
+            if(assetToSell.getQuantity() >= quantity)
+            {
+                order.setStatus(OrderStatus.SUCCESS);
+                order.setOrderType(OrderType.SELL);
+                Order savedOrder = orderRepository.save(order);
+
+                walletService.payOrderPayment(order, user);
+
+                Asset updatedAsset = assetService.updateAsset(assetToSell.getId(), -quantity);
+
+                if(updatedAsset.getQuantity() * coin.getCurrentPrice() <= 1)
+                    assetService.deleteAsset(updatedAsset.getId());
+
+                return savedOrder;
+            }
+            throw new Exception("Insufficient quantity to sell");
         }
-        throw new Exception("Insufficient quantity to sell");
+        throw new Exception("Asset Not Found");
     }
 
 

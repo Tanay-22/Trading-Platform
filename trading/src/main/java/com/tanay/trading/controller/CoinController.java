@@ -1,6 +1,5 @@
 package com.tanay.trading.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tanay.trading.model.Coin;
@@ -54,7 +53,7 @@ public class CoinController
 
 
     @GetMapping("/top50")
-    ResponseEntity<JsonNode> getTop50CoinByMArketCapRank() throws Exception
+    ResponseEntity<JsonNode> getTop50CoinByMarketCapRank() throws Exception
     {
         String searchedCoins = coinService.getTop50CoinsByMarketCapRank();
         JsonNode jsonNode = objectMapper.readTree(searchedCoins);
@@ -63,10 +62,10 @@ public class CoinController
     }
 
 
-    @GetMapping("/trading")
-    ResponseEntity<JsonNode> getTradingCoin() throws Exception
+    @GetMapping("/trending")
+    ResponseEntity<JsonNode> getTrendingCoin() throws Exception
     {
-        String searchedCoins = coinService.getTradingCoins();
+        String searchedCoins = coinService.getTrendingCoins();
         JsonNode jsonNode = objectMapper.readTree(searchedCoins);
 
         return ResponseEntity.ok(jsonNode);

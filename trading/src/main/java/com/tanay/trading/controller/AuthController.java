@@ -8,6 +8,7 @@ import com.tanay.trading.response.AuthResponse;
 import com.tanay.trading.service.CustomUserDetailService;
 import com.tanay.trading.service.EmailService;
 import com.tanay.trading.service.TwoFactorOTPService;
+import com.tanay.trading.service.WatchlistService;
 import com.tanay.trading.utils.OtpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,9 @@ public class AuthController
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private WatchlistService watchlistService;
+
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> register(@RequestBody User user) throws Exception
     {
@@ -49,6 +53,7 @@ public class AuthController
         createdUser.setFullName(user.getFullName());
 
         User savedUser = userRepository.save(createdUser);
+        watchlistService.createWatchlist(savedUser);
 
         Authentication auth = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(auth);

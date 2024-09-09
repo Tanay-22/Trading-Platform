@@ -1,7 +1,7 @@
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet.jsx";
 import {Button} from "@/components/ui/button.jsx";
-import {DragHandleHorizontalIcon} from "@radix-ui/react-icons";
-import {Avatar, AvatarImage} from "@/components/ui/avatar.jsx";
+import {DragHandleHorizontalIcon, MagnifyingGlassIcon} from "@radix-ui/react-icons";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.jsx";
 import coinImg from "../../../../public/Dogecoin_Logo.png"
 import SideBar from "@/page/home/navbar/SideBar.jsx";
 
@@ -41,6 +41,25 @@ const Navbar = () =>
                         <SideBar />
                     </SheetContent>
                 </Sheet>
+
+                <p className="text-sm lg:text-base cursor-pointer">
+                    Knull Trading
+                </p>
+                <div className="p-0 ml-9">
+                    <Button variant="outline">
+                        <MagnifyingGlassIcon />
+                        <span>Search</span>
+                    </Button>
+
+                </div>
+            </div>
+
+            <div>
+                <Avatar>
+                    <AvatarFallback>
+                        K
+                    </AvatarFallback>
+                </Avatar>
             </div>
 
         </div>

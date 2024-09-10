@@ -1,11 +1,17 @@
 import './App.css'
-import Navbar from "@/page/home/navbar/Navbar.jsx";
+import Navbar from "@/page/navbar/Navbar.jsx";
 import Home from "@/page/home/Home.jsx";
 import {Route, Routes} from "react-router-dom";
 import Portfolio from "@/page/portfolio/Portfolio.jsx";
 import Activity from "@/page/activity/Activity.jsx";
 import Wallet from "@/page/wallet/Wallet.jsx";
 import Withdrawal from "@/page/withdrawal/Withdrawal.jsx";
+import PaymentDetails from "@/page/paymentDetails/PaymentDetails.jsx";
+import StockDetails from "@/page/stockDetails/StockDetails.jsx";
+import Watchlist from "@/page/watchlist/Watchlist.jsx";
+import Profile from "@/page/profile/Profile.jsx";
+import {Search} from "lucide-react";
+import NotFound from "@/page/notFound/NotFound.jsx";
 
 function App() {
 
@@ -20,7 +26,12 @@ function App() {
             <Route path="/activity" element={<Activity />} />
             <Route path="/wallet" element={<Wallet />} />
             <Route path="/withdrawal" element={<Withdrawal />} />
-            <Route path="/wallet" element={<Wallet />} />
+            <Route path="/payment-details" element={<PaymentDetails />} />
+            <Route path="/market" element={<StockDetails />} />
+            <Route path="/watchlist" element={<Watchlist />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/search-coin" element={<Search />} />
+            <Route path="*" element={<NotFound />} />
 
 
         </Routes>

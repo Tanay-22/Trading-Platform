@@ -2,8 +2,8 @@ import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "@/comp
 import {Button} from "@/components/ui/button.jsx";
 import {DragHandleHorizontalIcon, MagnifyingGlassIcon} from "@radix-ui/react-icons";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.jsx";
-import coinImg from "../../../../public/Dogecoin_Logo.png"
-import SideBar from "@/page/home/navbar/SideBar.jsx";
+import coinImg from "../../../public/Dogecoin_Logo.png"
+import SideBar from "@/page/navbar/SideBar.jsx";
 
 const Navbar = () =>
 {

@@ -3,31 +3,33 @@ import {Avatar, AvatarImage} from "@/components/ui/avatar.jsx";
 import {Button} from "@/components/ui/button.jsx";
 import {BookmarkFilledIcon} from "@radix-ui/react-icons";
 
-const Activity = () =>
+const Watchlist = () =>
 {
+    const handleRemoveFromWatchlist = () =>
+    {
+        console.log("removed");
+    }
+
+
     return (
         <div className="p-5 lg:px-20">
-            <h1 className="font-bold text-3xl pb-5">Activity</h1>
+            <h1 className="font-bold text-3xl pb-5">Watchlist</h1>
             <Table className="border">
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="py-5">Date & Time</TableHead>
-                        <TableHead>Trading Pair</TableHead>
-                        <TableHead>Cost Price</TableHead>
-                        <TableHead>Selling Price</TableHead>
-                        <TableHead>Order Type</TableHead>
-                        <TableHead>Profit/Loss</TableHead>
-                        <TableHead className="text-right">Value</TableHead>
+                        <TableHead className="py-5">Coin</TableHead>
+                        <TableHead>Symbol</TableHead>
+                        <TableHead>Volume</TableHead>
+                        <TableHead>Market Cap</TableHead>
+                        <TableHead>24 Hrs</TableHead>
+                        <TableHead>Price</TableHead>
+                        <TableHead className="text-right text-red-600">Remove</TableHead>
 
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, index) => (
                         <TableRow key={index}>
-                            <TableCell>
-                                <p>2024/09/10</p>
-                                <p className="text-gray-400">23:02:33</p>
-                            </TableCell>
                             <TableCell className="font-medium flex items-center gap-2">
                                 <Avatar className="-z-50">
                                     <AvatarImage
@@ -39,8 +41,18 @@ const Activity = () =>
                             <TableCell>BTC</TableCell>
                             <TableCell>416464646</TableCell>
                             <TableCell>416464646</TableCell>
+                            <TableCell>416464646</TableCell>
                             <TableCell>$250.00</TableCell>
-                            <TableCell className="text-right">$250.00</TableCell>
+                            <TableCell className="text-right">
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-10 w-10"
+                                    onClick={() => handleRemoveFromWatchlist()}
+                                >
+                                    <BookmarkFilledIcon className="h-6 w-6" />
+                                </Button>
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -49,4 +61,4 @@ const Activity = () =>
     );
 };
 
-export default Activity;
+export default Watchlist;

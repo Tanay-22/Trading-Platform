@@ -9,7 +9,7 @@ import {Button} from "@/components/ui/button.jsx";
 const TopupForm = () =>
 {
     const [amount, setAmount] = useState();
-    const [paymentMethod, setPaymentMehtod] = useState("RAZORPAY");
+    const [paymentMethod, setPaymentMethod] = useState("RAZORPAY");
 
     const handleAmountChange = (e) =>
     {
@@ -18,7 +18,7 @@ const TopupForm = () =>
 
     const handlePaymentMethodChange = (value) =>
     {
-        setPaymentMehtod(value);
+        setPaymentMethod(value);
     };
 
     const handleSubmit = () =>

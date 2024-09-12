@@ -5,12 +5,14 @@ import {
     WalletIcon,
     CopyIcon,
     UploadIcon,
-    ArrowRightLeftIcon
+    ArrowRightLeftIcon, HistoryIcon, ShuffleIcon
 } from "lucide-react";
 import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog.jsx";
 import TopupForm from "@/page/wallet/TopupForm.jsx";
 import {ReloadIcon} from "@radix-ui/react-icons";
 import WithdrawalRequestForm from "@/page/wallet/WithdrawalRequestForm.jsx";
+import TransferForm from "@/page/wallet/TransferForm.jsx";
+import {Avatar, AvatarFallback} from "@/components/ui/avatar.jsx";
 
 const Wallet = () =>
 {
@@ -104,13 +106,46 @@ const Wallet = () =>
                                             Transfer to Other Wallet
                                         </DialogTitle>
                                     </DialogHeader>
-                                    <TopupForm />
+                                    <TransferForm />
                                 </DialogContent>
                             </Dialog>
 
                         </div>
                     </CardContent>
                 </Card>
+
+                {/*     HISTORY     */}
+
+                <div className="py-5 pt-10">
+                    <div className="flex gap-2 items-center pb-5">
+                        <h1 className="text-2xl font-semibold">History</h1>
+                        <HistoryIcon className="h-7 w-7 p-0 cursor-pointer hover: text-gray-400"/>
+                    </div>
+
+                    <div className="space-y-5">
+                        {[1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, index) => (
+                            <div key={index}>
+                                <Card className="px-5 flex justify-between items-center p-2">
+
+                                    <div className="flex items-center gap-5">
+                                        <Avatar>
+                                            <AvatarFallback>
+                                                <ShuffleIcon className="text-green-500"/>
+                                            </AvatarFallback>
+                                        </Avatar>
+
+                                        <div className="space-y-1">
+                                            <h1>Buy Asset</h1>
+                                            <p className="text-sm text-gray-500">12-09-2024</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p className={`text-green-500`}>₹999</p>
+                                    </div>
+                                </Card>
+                            </div>))}
+                    </div>
+                </div>
             </div>
         </div>
     );

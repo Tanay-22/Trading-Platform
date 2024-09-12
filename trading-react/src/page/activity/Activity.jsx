@@ -1,7 +1,5 @@
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table.jsx";
 import {Avatar, AvatarImage} from "@/components/ui/avatar.jsx";
-import {Button} from "@/components/ui/button.jsx";
-import {BookmarkFilledIcon} from "@radix-ui/react-icons";
 
 const Activity = () =>
 {

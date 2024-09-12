@@ -1,9 +1,88 @@
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card.jsx";
+import {Badge} from "@/components/ui/badge.jsx";
+import {VerifiedIcon} from "lucide-react";
 
 const Profile = () =>
 {
     return (
-        <div>
-            Profile
+        <div className="flex flex-col items-center mb-5">
+
+            <div className="pt-10 w-full lg:w-[60%]">
+
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Your Information</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="lg:flex gap-32">
+                            <div className="space-y-7">
+                                <div className="flex">
+                                    <p className="w-[9rem]">Email : </p>
+                                    <p className="text-gray-500">knull@darkworld</p>
+                                </div>
+
+                                <div className="flex">
+                                    <p className="w-[9rem]">Full Name : </p>
+                                    <p className="text-gray-500">Tanay Pandey</p>
+                                </div>
+
+                                <div className="flex">
+                                    <p className="w-[9rem]">Date of Birth :</p>
+                                    <p className="text-gray-500">22/10/2002</p>
+                                </div>
+
+                                <div className="flex">
+                                    <p className="w-[9rem]">Nationality : </p>
+                                    <p className="text-gray-500">Indian</p>
+                                </div>
+                            </div>
+
+                            <div className="space-y-7">
+                                <div className="flex">
+                                    <p className="w-[9rem]">Email : </p>
+                                    <p className="text-gray-500">knull@darkworld</p>
+                                </div>
+
+                                <div className="flex">
+                                    <p className="w-[9rem]">Full Name : </p>
+                                    <p className="text-gray-500">Tanay Pandey</p>
+                                </div>
+
+                                <div className="flex">
+                                    <p className="w-[9rem]">Date of Birth :</p>
+                                    <p className="text-gray-500">22/10/2002</p>
+                                </div>
+
+                                <div className="flex">
+                                    <p className="w-[9rem]">Nationality : </p>
+                                    <p className="text-gray-500">Indian</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </CardContent>
+                </Card>
+
+                <div className="mt-6">
+
+                    <Card className="w-full">
+                        <CardHeader className="pb-7">
+
+                            <div className="flex items-center gap-3">
+                                <CardTitle>Two-steps Verification </CardTitle>
+                                {true ?
+                                    <Badge className={"space-x-2 text-2hite bg-green-600"}>
+                                        <VerifiedIcon/>
+                                        Enabled
+                                    </Badge>
+                                    :
+                                    <Badge className="bg-orange-500">Disabled</Badge>
+                                }
+                            </div>
+                        </CardHeader>
+                    </Card>
+                </div>
+            </div>
         </div>
     );
 };

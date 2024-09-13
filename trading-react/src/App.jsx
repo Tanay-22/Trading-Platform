@@ -12,31 +12,39 @@ import Watchlist from "@/page/watchlist/Watchlist.jsx";
 import Profile from "@/page/profile/Profile.jsx";
 import {Search} from "lucide-react";
 import NotFound from "@/page/notFound/NotFound.jsx";
+import Auth from "@/page/auth/Auth.jsx";
 
-function App() {
+function App()
+{
+    return (
+        <>
+            {true ?
+                <Auth/>
+                :
+                <div>
+                    <Navbar/>
 
-  return (
-    <>
-        <Navbar/>
+                    <Routes>
 
-        <Routes>
-
-            <Route path="/" element={<Home />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/activity" element={<Activity />} />
-            <Route path="/wallet" element={<Wallet />} />
-            <Route path="/withdrawal" element={<Withdrawal />} />
-            <Route path="/payment-details" element={<PaymentDetails />} />
-            <Route path="/market" element={<StockDetails />} />
-            <Route path="/watchlist" element={<Watchlist />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/search-coin" element={<Search />} />
-            <Route path="*" element={<NotFound />} />
+                        <Route path="/" element={<Home/>}/>
+                        <Route path="/portfolio" element={<Portfolio/>}/>
+                        <Route path="/activity" element={<Activity/>}/>
+                        <Route path="/wallet" element={<Wallet/>}/>
+                        <Route path="/withdrawal" element={<Withdrawal/>}/>
+                        <Route path="/payment-details" element={<PaymentDetails/>}/>
+                        <Route path="/market/bitcoin" element={<StockDetails/>}/>
+                        <Route path="/watchlist" element={<Watchlist/>}/>
+                        <Route path="/profile" element={<Profile/>}/>
+                        <Route path="/search-coin" element={<Search/>}/>
+                        <Route path="*" element={<NotFound/>}/>
 
 
-        </Routes>
-    </>
-  )
+                    </Routes>
+                </div>
+            }
+
+        </>
+    )
 }
 
 export default App

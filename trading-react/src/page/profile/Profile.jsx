@@ -1,9 +1,23 @@
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card.jsx";
 import {Badge} from "@/components/ui/badge.jsx";
 import {VerifiedIcon} from "lucide-react";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger
+} from "@/components/ui/dialog.jsx";
+import {Button} from "@/components/ui/button.jsx";
+import AccountVerificationForm from "@/page/profile/AccountVerificationForm.jsx";
 
 const Profile = () =>
 {
+    const handleEnableTwoStepsVerification = () =>
+    {
+
+    };
+
     return (
         <div className="flex flex-col items-center mb-5">
 
@@ -80,6 +94,23 @@ const Profile = () =>
                                 }
                             </div>
                         </CardHeader>
+                        <CardContent>
+                            <div>
+                                <Dialog>
+                                    <DialogTrigger>
+                                        <Button>Enable Two Steps Verification</Button>
+                                    </DialogTrigger>
+                                    <DialogContent>
+                                        <DialogHeader>
+                                            <DialogTitle>Verify your Account</DialogTitle>
+                                        </DialogHeader>
+
+                                        <AccountVerificationForm handleSubmit={handleEnableTwoStepsVerification}/>
+                                    </DialogContent>
+                                </Dialog>
+
+                            </div>
+                        </CardContent>
                     </Card>
                 </div>
             </div>

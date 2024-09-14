@@ -1,7 +1,12 @@
 .authContainer
 {
-    background-image: url("../../../../public/knull.webp");
+    background-image: url("/knull.webp");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+}
+
+.bgBlur
+{
+    backdrop-filter: blur(10px);
 }

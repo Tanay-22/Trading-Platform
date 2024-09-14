@@ -57,7 +57,7 @@ const TopupForm = () =>
                         />
                         <Label htmlFor="r1">
                             <div className="rounded-md w-32">
-                                <img src="../../../public/razorpay.png" alt="razorpay"/>
+                                <img src="/razorpay.png" alt="razorpay"/>
                             </div>
                         </Label>
 
@@ -74,7 +74,7 @@ const TopupForm = () =>
                         />
                         <Label htmlFor="r2">
                             <div className="rounded-md w-32">
-                                <img src="../../../public/stripe.png" alt="razorpay"
+                                <img src="/stripe.png" alt="razorpay"
                                     className="h-10 w-full"
                                 />
                             </div>

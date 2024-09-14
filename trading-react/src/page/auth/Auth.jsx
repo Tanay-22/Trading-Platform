@@ -16,12 +16,12 @@ const Auth = () =>
 
                 <div className="bgBlur absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
                     flex flex-col justify-center items-center h-[35rem] w-[35rem] rounded-md z-50 bg-black
-                    bg-opacity-50 shadow-2xl shadow-white"
+                    bg-opacity-50 shadow-2xl shadow-white px-10"
                 >
                     <h1 className="text-6xl font-bold pb-9">Knull Trading</h1>
 
-                    {location.path === "/signup" ?
-                        <section>
+                    {location.pathname === "/signup" ?
+                        (<section className="w-full">
                             <SignUpForm/>
                             <div className="flex items-center justify-center">
                                 <span>Already have an account ?,</span>
@@ -32,14 +32,14 @@ const Auth = () =>
                                     Sign In
                                 </Button>
                             </div>
-                        </section>
+                        </section>)
                         :
                         location.pathname === "/forgot-password" ?
-                            <section>
+                            (<section className="w-full">
                                 <ForgotPasswordForm/>
-                            </section>
+                            </section>)
                             :
-                            <section>
+                            (<section className="w-full">
                                 <SignInForm/>
                                 <div className="flex items-center justify-center">
                                     <span>Don't have account?,</span>
@@ -50,9 +50,17 @@ const Auth = () =>
                                         Sign Up
                                     </Button>
                                 </div>
-                            </section>
+                                <div className="mt-10">
+                                    <Button
+                                        className="py-5 w-full"
+                                        variant="outline"
+                                        onClick={() => navigate("/forgot-password")}
+                                    >
+                                        Forgot Password
+                                    </Button>
+                                </div>
+                            </section>)
                     }
-
                 </div>
             </div>
         </div>

@@ -10,9 +10,12 @@ import {
 } from "@/components/ui/dialog.jsx";
 import {Button} from "@/components/ui/button.jsx";
 import AccountVerificationForm from "@/page/profile/AccountVerificationForm.jsx";
+import {useSelector} from "react-redux";
 
 const Profile = () =>
 {
+    const auth = useSelector(store => store.auth);
+
     const handleEnableTwoStepsVerification = () =>
     {
 
@@ -32,12 +35,12 @@ const Profile = () =>
                             <div className="space-y-7">
                                 <div className="flex">
                                     <p className="w-[9rem]">Email : </p>
-                                    <p className="text-gray-500">knull@darkworld</p>
+                                    <p className="text-gray-500">{auth.user?.email}</p>
                                 </div>
 
                                 <div className="flex">
                                     <p className="w-[9rem]">Full Name : </p>
-                                    <p className="text-gray-500">Tanay Pandey</p>
+                                    <p className="text-gray-500">{auth.user?.fullName}</p>
                                 </div>
 
                                 <div className="flex">
@@ -84,7 +87,7 @@ const Profile = () =>
 
                             <div className="flex items-center gap-3">
                                 <CardTitle>Two-steps Verification </CardTitle>
-                                {true ?
+                                {auth.twoFactorAuth?.isEnabled ?
                                     <Badge className={"space-x-2 text-2hite bg-green-600"}>
                                         <VerifiedIcon/>
                                         Enabled

@@ -4,9 +4,13 @@ import {DragHandleHorizontalIcon, MagnifyingGlassIcon} from "@radix-ui/react-ico
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.jsx";
 import coinImg from "../../../public/Dogecoin_Logo.png"
 import SideBar from "@/page/navbar/SideBar.jsx";
+import {useSelector} from "react-redux";
 
 const Navbar = () =>
 {
+    const auth = useSelector(store => store.auth);
+
+
     return (
         <div className="px-2 py-3 border-b z-50 bg-background bg-opacity-0 sticky top-0 left-0 right-8 flex
         justify-between items-center">
@@ -57,7 +61,7 @@ const Navbar = () =>
             <div>
                 <Avatar>
                     <AvatarFallback>
-                        K
+                        {auth.user?.fullName[0].toUpperCase()}
                     </AvatarFallback>
                 </Avatar>
             </div>

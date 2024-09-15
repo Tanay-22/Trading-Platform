@@ -42,14 +42,14 @@ public class AppConfig
             {
                 CorsConfiguration cfg = new CorsConfiguration();
                 cfg.setAllowedOrigins(Arrays.asList(
-                        "http://localhost:3000/",
-                        "http://localhost:5173/"
+                        "http://localhost:3000",
+                        "http://localhost:5173"
                 ));
                 cfg.setAllowedMethods(Collections.singletonList("*"));
                 cfg.setAllowCredentials(true);
                 cfg.setAllowedHeaders(Collections.singletonList("*"));
                 cfg.setExposedHeaders(Arrays.asList(JwtConstant.JWT_HEADER));
-                cfg.setMaxAge(3600l);
+                cfg.setMaxAge(3600L);
 
                 return cfg;
             }

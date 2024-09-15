@@ -13,14 +13,26 @@ import Profile from "@/page/profile/Profile.jsx";
 import {Search} from "lucide-react";
 import NotFound from "@/page/notFound/NotFound.jsx";
 import Auth from "@/page/auth/Auth.jsx";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {getUser} from "@/state/auth/Action.js";
 
 function App()
 {
+    const auth = useSelector(store => store.auth);
+    const dispatch = useDispatch();
+
+    // console.log("auth", auth);
+
+
+    useEffect(() =>
+    {
+        dispatch(getUser(auth.jwt || localStorage.getItem("jwt")));
+    },[auth.jwt]);
+
     return (
         <>
-            {true ?
-                <Auth/>
-                :
+            {auth.user ?
                 <div>
                     <Navbar/>
 
@@ -41,6 +53,8 @@ function App()
 
                     </Routes>
                 </div>
+                :
+                <Auth/>
             }
 
         </>

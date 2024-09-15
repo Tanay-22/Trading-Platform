@@ -41,8 +41,7 @@ public class JwtProvider
 
     public static String getEmailFromToken(String jwt)
     {
-        if (jwt.startsWith("Bearer "))
-            jwt = jwt.substring(7);
+        jwt = jwt.substring(7);
 
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(key)

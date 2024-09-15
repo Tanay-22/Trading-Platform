@@ -17,7 +17,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.crypto.SecretKey;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class JwtTokenValidator extends OncePerRequestFilter
@@ -31,8 +30,7 @@ public class JwtTokenValidator extends OncePerRequestFilter
 
         if(jwt != null)
         {
-            if(jwt.startsWith("Bearer "))
-                jwt = jwt.substring(7);
+            jwt = jwt.substring(7);
 
             try
             {
@@ -53,6 +51,7 @@ public class JwtTokenValidator extends OncePerRequestFilter
             }
             catch (Exception e)
             {
+                e.printStackTrace();
                 throw new BadCredentialsException("Invalid Token");
             }
         }

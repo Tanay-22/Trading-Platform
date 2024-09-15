@@ -2,9 +2,12 @@ import {useForm} from "react-hook-form";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form.jsx";
 import {Input} from "@/components/ui/input.jsx";
 import {Button} from "@/components/ui/button.jsx";
+import {useDispatch} from "react-redux";
+import {register} from "@/state/auth/Action.js";
 
 const SignUpForm = () =>
 {
+    const dispatch = useDispatch();
     const form = useForm({
         resolver: "",
         defaultValues:
@@ -19,7 +22,10 @@ const SignUpForm = () =>
 
     const onSubmit = (data) =>
     {
-        console.log(data);
+        const { passwordVerify, ...formDataWithoutVerify } = data;
+        console.log(formDataWithoutVerify);
+        // Dispatch the formDataWithoutVerify, which doesn't include passwordVerify
+        dispatch(register(formDataWithoutVerify));
     };
 
 

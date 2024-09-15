@@ -4,6 +4,8 @@ import com.tanay.trading.config.JwtProvider;
 import com.tanay.trading.model.TwoFactorOTP;
 import com.tanay.trading.model.User;
 import com.tanay.trading.repository.UserRepository;
+import com.tanay.trading.request.LoginRequest;
+import com.tanay.trading.request.SignUpRequest;
 import com.tanay.trading.response.AuthResponse;
 import com.tanay.trading.service.CustomUserDetailService;
 import com.tanay.trading.service.EmailService;
@@ -40,22 +42,22 @@ public class AuthController
     private WatchlistService watchlistService;
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> register(@RequestBody User user) throws Exception
+    public ResponseEntity<AuthResponse> register(@RequestBody SignUpRequest request) throws Exception
     {
-        User isUserExist = userRepository.findByEmail(user.getEmail());
+        User isUserExist = userRepository.findByEmail(request.getEmail());
 
         if(isUserExist != null)
             throw new Exception("Email already linked with another account");
 
         User createdUser = new User();
-        createdUser.setPassword(user.getPassword());
-        createdUser.setEmail(user.getEmail());
-        createdUser.setFullName(user.getFullName());
+        createdUser.setPassword(request.getPassword());
+        createdUser.setEmail(request.getEmail());
+        createdUser.setFullName(request.getFullName());
 
         User savedUser = userRepository.save(createdUser);
         watchlistService.createWatchlist(savedUser);
 
-        Authentication auth = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
+        Authentication auth = new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword());
         SecurityContextHolder.getContext().setAuthentication(auth);
 
         String jwt = JwtProvider.generateToken(auth);
@@ -68,14 +70,14 @@ public class AuthController
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<AuthResponse> login(@RequestBody User user) throws Exception
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) throws Exception
     {
-        Authentication auth = authenticate(user);
+        Authentication auth = authenticate(request);
         SecurityContextHolder.getContext().setAuthentication(auth);
 
         String jwt = JwtProvider.generateToken(auth);
 
-        User authUser = userRepository.findByEmail(user.getEmail());
+        User user = userRepository.findByEmail(request.getEmail());
 
         if(user.getTwoFactorAuth().isEnabled())
         {
@@ -84,11 +86,11 @@ public class AuthController
             res.setTwoFactorAuthEnabled(true);
             String otp = OtpUtils.generateOtp();
 
-            TwoFactorOTP oldTwoFactorOTP = twoFactorOTPService.findByUser(authUser.getId());
+            TwoFactorOTP oldTwoFactorOTP = twoFactorOTPService.findByUser(user.getId());
             if(oldTwoFactorOTP != null)
                 twoFactorOTPService.deleteTwoFactorOtp(oldTwoFactorOTP);
 
-            TwoFactorOTP newTwoFactorOTP = twoFactorOTPService.createTwoFactorOtp(authUser, otp, jwt);
+            TwoFactorOTP newTwoFactorOTP = twoFactorOTPService.createTwoFactorOtp(user, otp, jwt);
 
             emailService.sendVerificationOtpEmail(user.getFullName(), otp);
 
@@ -104,16 +106,16 @@ public class AuthController
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
-    private Authentication authenticate(User user)
+    private Authentication authenticate(LoginRequest request)
     {
-        UserDetails userDetails = customUserDetailService.loadUserByUsername(user.getEmail());
+        UserDetails userDetails = customUserDetailService.loadUserByUsername(request.getEmail());
         if(userDetails == null)
             throw new BadCredentialsException("Invalid Email");
 
-        if(!user.getPassword().equals(userDetails.getPassword()))
+        if(!request.getPassword().equals(userDetails.getPassword()))
             throw new BadCredentialsException("Invalid Password");
 
-        return new UsernamePasswordAuthenticationToken(userDetails, user.getPassword(),
+        return new UsernamePasswordAuthenticationToken(userDetails, request.getPassword(),
                 userDetails.getAuthorities());
     }
 

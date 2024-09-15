@@ -2,9 +2,14 @@ import {useForm} from "react-hook-form";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form.jsx";
 import {Input} from "@/components/ui/input.jsx";
 import {Button} from "@/components/ui/button.jsx";
+import {useDispatch} from "react-redux";
+import {login} from "@/state/auth/Action.js";
+import {useNavigate} from "react-router-dom";
 
 const SignInForm = () =>
 {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const form = useForm({
         resolver: "",
         defaultValues:
@@ -16,6 +21,7 @@ const SignInForm = () =>
 
     const onSubmit = (data) =>
     {
+        dispatch(login({data, navigate}));
         console.log(data);
     };
 

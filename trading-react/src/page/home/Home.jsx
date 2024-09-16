@@ -1,17 +1,22 @@
 import {Button} from "@/components/ui/button.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import AssetTable from "@/page/home/AssetTable.jsx";
 import StockChart from "@/page/home/StockChart.jsx";
 import {Avatar, AvatarImage} from "@/components/ui/avatar.jsx";
 import {Cross1Icon, DotIcon} from "@radix-ui/react-icons";
 import {MessageCircle} from "lucide-react";
 import {Input} from "@/components/ui/input.jsx";
+import {getCoinList} from "@/state/coin/Action.js";
+import {useDispatch, useSelector} from "react-redux";
 
 const Home = () =>
 {
     const [category, setCategory] = useState("all");
     const [inputValue, setInputValue] = useState("");
     const [isBotRelease, setIsBotRelease] = useState(false);
+
+    const dispatch = useDispatch();
+    const coin = useSelector(store => store.coin);
 
     const buttons =
         [
@@ -42,6 +47,11 @@ const Home = () =>
 
     const handleBotRelease = () => setIsBotRelease(!isBotRelease);
 
+    useEffect(() =>
+    {
+        dispatch(getCoinList(1));
+    }, []);
+
     return (
         <div className="relative">
             <div className="lg:flex">
@@ -60,7 +70,7 @@ const Home = () =>
                             </Button>
                         ))}
                     </div>
-                    <AssetTable />
+                    <AssetTable coins = {coin.coinList} category={category}/>
                 </div>
 
                 <div className="hidden lg:block lg:w-[50%] p-5">

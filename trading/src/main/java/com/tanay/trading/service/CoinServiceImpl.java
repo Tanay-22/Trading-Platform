@@ -43,10 +43,8 @@ public class CoinServiceImpl implements CoinService
 
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
 
-            List<Coin> coins = objectMapper.readValue(response.getBody(),
+            return objectMapper.readValue(response.getBody(),
                     new TypeReference<List<Coin>>() {});
-
-            return coins;
         }
         catch (HttpClientErrorException | HttpServerErrorException e)
         {

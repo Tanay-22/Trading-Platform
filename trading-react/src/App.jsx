@@ -44,7 +44,7 @@ function App()
                         <Route path="/wallet" element={<Wallet/>}/>
                         <Route path="/withdrawal" element={<Withdrawal/>}/>
                         <Route path="/payment-details" element={<PaymentDetails/>}/>
-                        <Route path="/market/bitcoin" element={<StockDetails/>}/>
+                        <Route path="/market/:id" element={<StockDetails/>}/>
                         <Route path="/watchlist" element={<Watchlist/>}/>
                         <Route path="/profile" element={<Profile/>}/>
                         <Route path="/search-coin" element={<Search/>}/>

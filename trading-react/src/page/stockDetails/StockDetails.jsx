@@ -1,14 +1,30 @@
 import {Avatar, AvatarImage} from "@/components/ui/avatar.jsx";
 import {BookmarkFilledIcon, BookmarkIcon, DotIcon} from "@radix-ui/react-icons";
 import {Button} from "@/components/ui/button.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog.jsx";
 import TradingForm from "@/page/stockDetails/TradingForm.jsx";
 import StockChart from "@/page/home/StockChart.jsx";
+import {useDispatch, useSelector} from "react-redux";
+import {useParams} from "react-router-dom";
+import {getCoinsDetails} from "@/state/coin/Action.js";
 
 const StockDetails = () =>
 {
     const [bookmark, setBookmark] = useState(false)
+
+    const disptach = useDispatch();
+    const { id } = useParams();
+    const { coinDetails } = useSelector(store => store.coin);
+
+    console.log("coinDetails", coinDetails);
+
+    useEffect(() =>
+    {
+        disptach(getCoinsDetails(id));
+    }, [id]);
+
+
     return (
         <div className="p-5 mt-5">
             <div className="flex justify-between">
@@ -16,7 +32,7 @@ const StockDetails = () =>
                     <div>
                         <Avatar>
                             <AvatarImage
-                                src={"https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400"}
+                                src={coinDetails?.image.large}
                             />
                         </Avatar>
                     </div>

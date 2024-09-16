@@ -1,9 +1,7 @@
 package com.tanay.trading.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 
@@ -88,7 +86,8 @@ public class Coin
     private LocalDateTime atlDate;
 
     @JsonProperty("roi")
-    private Double roi;
+    @Embedded
+    private Roi roi;
 
     @JsonProperty("last_updated")
     private LocalDateTime lastUpdated;

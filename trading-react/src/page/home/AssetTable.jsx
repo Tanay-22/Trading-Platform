@@ -2,9 +2,11 @@ import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/c
 import {Avatar, AvatarImage} from "@/components/ui/avatar.jsx";
 import {useNavigate} from "react-router-dom";
 
-const AssetTable = () =>
+const AssetTable = ({ coins, category }) =>
 {
     const navigate = useNavigate();
+
+
 
     return (
         // Columns -> Coin, Symbol, Volume, Market Cap, 24H, price
@@ -20,23 +22,23 @@ const AssetTable = () =>
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {[1,1,1,1,1,1,1,1,1,1,1].map((item, index) => (
+                {coins.map((item, index) => (
                     <TableRow key = {index}>
                         <TableCell
-                            onClick={() => navigate("/market/bitcoin")}
+                            onClick={() => navigate(`/market/${item.id}`)}
                             className="font-medium flex items-center gap-2">
                             <Avatar className="-z-50">
                                 <AvatarImage
-                                    src="https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400"
+                                    src={item.image}
                                 />
                             </Avatar>
-                            <span>BitCoin</span>
+                            <span>{item.name}</span>
                         </TableCell>
-                        <TableCell>BTC</TableCell>
-                        <TableCell>416464646</TableCell>
-                        <TableCell>416464646</TableCell>
-                        <TableCell>416464646</TableCell>
-                        <TableCell className="text-right">$250.00</TableCell>
+                        <TableCell>{item.symbol}</TableCell>
+                        <TableCell>{item.total_volume}</TableCell>
+                        <TableCell>₹{item.market_cap}</TableCell>
+                        <TableCell>₹{item.market_cap_change_24h}</TableCell>
+                        <TableCell className="text-right">₹{item.current_price}</TableCell>
                     </TableRow>
                 ))}
             </TableBody>

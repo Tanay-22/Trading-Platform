@@ -13,9 +13,26 @@ import {ReloadIcon} from "@radix-ui/react-icons";
 import WithdrawalRequestForm from "@/page/wallet/WithdrawalRequestForm.jsx";
 import TransferForm from "@/page/wallet/TransferForm.jsx";
 import {Avatar, AvatarFallback} from "@/components/ui/avatar.jsx";
+import {useDispatch, useStore} from "react-redux";
+import {useEffect} from "react";
+import {getUserWallet} from "@/state/wallet/Action.js";
 
 const Wallet = () =>
 {
+    const wallet = useStore(store => store.wallet);
+    const dispatch = useDispatch();
+
+    useEffect(() =>
+    {
+        handleFetchUserWallet();
+    }, []);
+
+
+    const handleFetchUserWallet = () =>
+    {
+        dispatch(getUserWallet());
+    }
+
     return (
         <div className="flex flex-col items-center">
             <div className="pt-10 w-full lg:w-[60%]">

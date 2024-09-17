@@ -6,8 +6,18 @@ import {Avatar, AvatarImage} from "@/components/ui/avatar.jsx";
 import {Cross1Icon, DotIcon} from "@radix-ui/react-icons";
 import {MessageCircle} from "lucide-react";
 import {Input} from "@/components/ui/input.jsx";
-import {getCoinList} from "@/state/coin/Action.js";
+import {getCoinList, getTop50Coins} from "@/state/coin/Action.js";
 import {useDispatch, useSelector} from "react-redux";
+import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+} from "@/components/ui/pagination"
+
 
 const Home = () =>
 {
@@ -47,6 +57,13 @@ const Home = () =>
 
     const handleBotRelease = () => setIsBotRelease(!isBotRelease);
 
+
+    useEffect(() =>
+    {
+        dispatch(getTop50Coins());
+    }, [category]);
+
+
     useEffect(() =>
     {
         dispatch(getCoinList(1));
@@ -70,11 +87,30 @@ const Home = () =>
                             </Button>
                         ))}
                     </div>
-                    <AssetTable coins = {coin.coinList} category={category}/>
+                    <AssetTable coins = {category === "all" ? coin.coinList : coin.top50 } category={category}/>
+                    <div>
+                        <Pagination>
+                            <PaginationContent>
+                                <PaginationItem>
+                                    <PaginationPrevious href="#" />
+                                </PaginationItem>
+                                <PaginationItem>
+                                    <PaginationLink href="#">1</PaginationLink>
+                                </PaginationItem>
+                                <PaginationItem>
+                                    <PaginationEllipsis />
+                                </PaginationItem>
+                                <PaginationItem>
+                                    <PaginationNext href="#" />
+                                </PaginationItem>
+                            </PaginationContent>
+                        </Pagination>
+
+                    </div>
                 </div>
 
                 <div className="hidden lg:block lg:w-[50%] p-5">
-                    <StockChart />
+                    <StockChart coinId="dogecoin" />
 
                     <div className="flex gap-5 items-center">
                         <div>

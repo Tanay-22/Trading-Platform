@@ -19,6 +19,7 @@ const StockDetails = () =>
 
     console.log("coinDetails", coinDetails);
 
+
     useEffect(() =>
     {
         disptach(getCoinsDetails(id));
@@ -38,15 +39,15 @@ const StockDetails = () =>
                     </div>
                     <div>
                         <div className="flex items-center gap-2">
-                            <p>BTC</p>
+                            <p>{coinDetails?.symbol.toUpperCase()}</p>
                             <DotIcon className="text-gray-400"/>
-                            <p className="text-gray-400">Bitcoin</p>
+                            <p className="text-gray-400">{coinDetails?.name}</p>
                         </div>
                         <div className="flex items-end gap-2">
-                            <p className="text-xl font-bold">₹4500</p>
+                            <p className="text-xl font-bold">₹{coinDetails?.market_data.current_price.inr}</p>
                             <p className="text-red-600">
-                                <span>-13113123.3463</span>
-                                <span>(-0.3523%)</span>
+                                <span>₹{coinDetails?.market_data.market_cap_change_24h_in_currency.inr}</span>
+                                <span>({coinDetails?.market_data.market_cap_change_percentage_24h}%)</span>
                             </p>
                         </div>
                     </div>
@@ -80,7 +81,7 @@ const StockDetails = () =>
             </div>
 
             <div className="mt-10">
-                <StockChart />
+                <StockChart coinId={id}/>
             </div>
         </div>
     );

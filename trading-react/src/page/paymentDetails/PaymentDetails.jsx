@@ -8,10 +8,13 @@ import {
 } from "@/components/ui/dialog.jsx";
 import PaymentDetailsForm from "@/page/paymentDetails/PaymentDetailsForm.jsx";
 import {Button} from "@/components/ui/button.jsx";
+import {useDispatch} from "react-redux";
 
 
 const PaymentDetails = () =>
 {
+    const dispatch = useDispatch();
+
     return (
         <div className="px-20">
             <h1 className="text-3xl font-bold py-10">Payment Details</h1>

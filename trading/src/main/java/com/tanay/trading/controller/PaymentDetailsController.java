@@ -3,6 +3,7 @@ package com.tanay.trading.controller;
 import com.tanay.trading.config.JwtConstant;
 import com.tanay.trading.model.PaymentDetails;
 import com.tanay.trading.model.User;
+import com.tanay.trading.request.PaymentDetailsRequest;
 import com.tanay.trading.service.PaymentDetailsService;
 import com.tanay.trading.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/payment-details/")
+@RequestMapping("/api/payment-details")
 public class PaymentDetailsController
 {
     @Autowired
@@ -22,7 +23,7 @@ public class PaymentDetailsController
 
 
     @PostMapping
-    public ResponseEntity<PaymentDetails> addPaymentDetails(@RequestBody PaymentDetails paymentDetailsRequest,
+    public ResponseEntity<PaymentDetails> addPaymentDetails(@RequestBody PaymentDetailsRequest paymentDetailsRequest,
                                                             @RequestHeader(JwtConstant.JWT_HEADER) String jwt)
         throws Exception
     {

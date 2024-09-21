@@ -3,10 +3,15 @@ import {useState} from "react";
 import {LandmarkIcon} from "lucide-react";
 import {Button} from "@/components/ui/button.jsx";
 import {DialogClose} from "@/components/ui/dialog.jsx";
+import {useDispatch, useSelector} from "react-redux";
 
 const WithdrawalRequestForm = () =>
 {
     const [amount, setAmount] = useState();
+
+    const wallet = useSelector(store => store.wallet);
+    const dispatch = useDispatch();
+
 
     const handleAmountChange = (e) =>
     {

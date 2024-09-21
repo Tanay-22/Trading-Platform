@@ -10,9 +10,13 @@ import {useForm} from "react-hook-form";
 import {Input} from "@/components/ui/input.jsx";
 import {Button} from "@/components/ui/button.jsx";
 import {DialogClose} from "@/components/ui/dialog.jsx";
+import {useDispatch} from "react-redux";
+import {addPaymentDetails} from "@/state/withdrawal/Action.js";
 
 const PaymentDetailsForm = () =>
 {
+    const dispatch = useDispatch();
+
     const form = useForm({
         resolver: "",
         defaultValues:
@@ -27,6 +31,7 @@ const PaymentDetailsForm = () =>
 
     const onSubmit = (data) =>
     {
+        dispatch(addPaymentDetails({ paymentDetails: data}));
         console.log(data);
     };
 

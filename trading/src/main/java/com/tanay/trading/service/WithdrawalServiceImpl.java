@@ -2,7 +2,9 @@ package com.tanay.trading.service;
 
 import com.tanay.trading.domain.WithdrawalStatus;
 import com.tanay.trading.model.User;
+import com.tanay.trading.model.WalletTransaction;
 import com.tanay.trading.model.Withdrawal;
+import com.tanay.trading.repository.WalletTransactionRepository;
 import com.tanay.trading.repository.WithdrawalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +42,9 @@ public class WithdrawalServiceImpl implements WithdrawalService
         withdrawal.setDate(LocalDateTime.now());
 
         if(accept)
+        {
             withdrawal.setStatus(WithdrawalStatus.SUCCESS);
+        }
         else
             withdrawal.setStatus(WithdrawalStatus.PENDING);
 

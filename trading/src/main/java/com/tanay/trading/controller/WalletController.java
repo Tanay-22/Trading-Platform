@@ -2,6 +2,7 @@ package com.tanay.trading.controller;
 
 import com.tanay.trading.config.JwtConstant;
 import com.tanay.trading.model.*;
+import com.tanay.trading.request.WalletTransactionRequest;
 import com.tanay.trading.response.PaymentResponse;
 import com.tanay.trading.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class WalletController
     @PutMapping("/{walletId}/transfer")
     public ResponseEntity<Wallet> walletToWalletTransfer(@RequestHeader(JwtConstant.JWT_HEADER) String jwt,
                                                          @PathVariable Long walletId,
-                                                         @RequestBody WalletTransaction req)
+                                                         @RequestBody WalletTransactionRequest req)
             throws Exception
     {
         User senderUser = userService.findUserByJwt(jwt);

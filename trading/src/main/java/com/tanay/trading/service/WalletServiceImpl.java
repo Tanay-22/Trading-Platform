@@ -4,6 +4,7 @@ import com.tanay.trading.domain.OrderType;
 import com.tanay.trading.model.Order;
 import com.tanay.trading.model.User;
 import com.tanay.trading.model.Wallet;
+import com.tanay.trading.model.WalletTransaction;
 import com.tanay.trading.repository.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

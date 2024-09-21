@@ -6,12 +6,12 @@ public class OtpUtils
 {
     public static String generateOtp()
     {
-        int optLenght = 4;
+        int optLength = 6;
         Random random = new Random();
 
         StringBuilder otp = new StringBuilder();
 
-        for (int i = 0; i < optLenght; i++)
+        for (int i = 0; i < optLength; i++)
             otp.append(random.nextInt(10));
 
         return otp.toString();

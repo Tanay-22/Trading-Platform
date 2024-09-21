@@ -110,7 +110,7 @@ public class PaymentServiceImpl implements PaymentService
             paymentLinkReq.put("reminder_enable", true);
 
             // re-direct to callback if payment is unsuccessful
-            paymentLinkReq.put("callback_url", "http:localhost:5173/wallet?order_id=" + orderId);
+            paymentLinkReq.put("callback_url", "http://localhost:5173/wallet?order_id=" + orderId);
             paymentLinkReq.put("callback_method", "get");
 
             PaymentLink payment = razorpay.paymentLink.create(paymentLinkReq);

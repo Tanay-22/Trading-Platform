@@ -7,7 +7,7 @@ export const getUserWallet = () => async (dispatch) =>
 
     try
     {
-        const { data } = api.get(`/api/wallet`);
+        const { data } = await api.get(`/api/wallet`);
         dispatch({ type: at.GET_USER_WALLET_SUCCESS, payload: data });
         console.log(data);
     }
@@ -36,7 +36,6 @@ export const getTransactionHistory = (walletId) => async (dispatch) =>
 export const depositMoney = ({orderId, paymentId, navigate }) => async (dispatch) =>
 {
     dispatch({ type: at.DEPOSIT_MONEY_REQUEST });
-
     try
     {
         const { data } = api.put(`/api/wallet/deposite`, null,
@@ -59,11 +58,9 @@ export const depositMoney = ({orderId, paymentId, navigate }) => async (dispatch
 export const paymentHandler = ({ amount, paymentMethod }) => async (dispatch) =>
 {
     // dispatch({ type: at.TRANSFER_MONEY_REQUEST });
-
     try
     {
         const { data } = await api.post(`/api/payment/${paymentMethod}/amount/${amount}`, null);
-
         window.location.href = data.payment_url;
     }
     catch (error)
@@ -75,11 +72,9 @@ export const paymentHandler = ({ amount, paymentMethod }) => async (dispatch) =>
 export const transferMoney = ({ walletId, reqData }) => async (dispatch) =>
 {
     dispatch({ type: at.TRANSFER_MONEY_REQUEST });
-
     try
     {
         const { data } = await api.put(`/api/wallet/${walletId}/transfer`, reqData);
-
         dispatch({ type: at.TRANSFER_MONEY_SUCCESS, paylaod: data });
     }
     catch (error)

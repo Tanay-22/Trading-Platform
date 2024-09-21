@@ -16,5 +16,5 @@ public class Wallet
     @OneToOne
     private User user;
 
-    private BigDecimal balance = BigDecimal.ZERO;
+    private BigDecimal balance = BigDecimal.valueOf(10000L);
 }
